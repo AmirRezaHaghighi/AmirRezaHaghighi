@@ -1,0 +1,22 @@
+{
+  "employees": [
+    {
+      "id": "5",
+      "firstName": "Ahmad",
+      "lastName": "Mola",
+      "role": "employee"
+    },
+    {
+      "id": "ebeaa16e-fda7-4991-80f5-4a6e5b4d4a07",
+      "firstName": "Amir",
+      "lastName": "Amiran",
+      "role": "manager"
+    },
+    {
+      "id": "29cd4909-fdcd-4812-9db5-bd22f74ca48d",
+      "firstName": "mamad",
+      "lastName": "Haghighi",
+      "role": "employee"
+    }
+  ]
+}
