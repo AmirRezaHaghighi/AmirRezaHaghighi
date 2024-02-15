@@ -1,8 +1,9 @@
-"use client"
-import { Provider } from "react-redux";
-import EmployeeListView from "./components/EmployeeListView";
-import store from "@/store";
+"use client";
+
 import { ReactNode } from "react";
+import { Provider } from "react-redux";
+import store from "src/store";
+import EmployeeListView from "./components/EmployeeListView";
 
 export default function Home() {
   return (
@@ -12,6 +13,6 @@ export default function Home() {
   );
 }
 
-const DataProvider = ({ children }: { children: ReactNode }) => {
-  return <Provider store={store}>{children}</Provider>;
-};
+const DataProvider = ({ children }: { children: ReactNode }) => (
+  <Provider store={store}>{children}</Provider>
+);

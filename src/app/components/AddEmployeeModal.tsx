@@ -16,14 +16,14 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { addEmployee, editEmployee } from "@/api/employee";
 import { v4 as uuidv4 } from "uuid";
-import { IEmployee } from "@/types/employee";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/slices";
+
 import { useSnackbar } from "notistack";
+import { RootState } from "src/store/slices";
+import { IEmployee } from "src/types/employee";
+import { addEmployee, editEmployee } from "src/api/employee";
 
 //----------------------------------
 
@@ -56,7 +56,7 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
       role: data?.role || "",
     },
     enableReinitialize: true,
-    validationSchema: validationSchema,
+    validationSchema,
     onSubmit:(values) => {
       if (Id) {
         dispatch(editEmployee({ id: Id, ...values }));

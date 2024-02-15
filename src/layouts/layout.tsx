@@ -1,6 +1,7 @@
 "use client";
-import { SnackbarProvider } from "@/components/snackbar";
+
 import { Box, CssBaseline } from "@mui/material";
+import { SnackbarProvider } from "src/components/snackbar";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -8,7 +9,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const MainLayout = ({ children }: Props) => {
+export default function MainLayout({ children }: Props) {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: 1 }}>
       <CssBaseline />
@@ -25,6 +26,4 @@ const MainLayout = ({ children }: Props) => {
       <Footer />
     </Box>
   );
-};
-
-export default MainLayout;
+}

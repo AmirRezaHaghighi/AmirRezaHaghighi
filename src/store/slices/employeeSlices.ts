@@ -1,11 +1,11 @@
+import { createSlice } from "@reduxjs/toolkit";
 import {
   addEmployee,
   deleteEmployee,
   editEmployee,
   fetchEmployees,
-} from "@/api/employee";
-import { IEmployee } from "@/types/employee";
-import { createSlice } from "@reduxjs/toolkit";
+} from "src/api/employee";
+import { IEmployee } from "src/types/employee";
 
 interface EmployeeState {
   employees: IEmployee[];

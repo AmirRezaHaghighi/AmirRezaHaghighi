@@ -1,5 +1,5 @@
-import { IEmployee } from "@/types/employee";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { IEmployee } from "src/types/employee";
 
 const baseURL = "http://localhost:3001";
 

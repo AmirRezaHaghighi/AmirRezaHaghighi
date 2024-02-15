@@ -1,21 +1,22 @@
 "use client";
+
 import react, { useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { Button, Container } from "@mui/material";
-import CustomBreadcrumbs from "@/components/custom-breadcrumbs/custom-breadcrumbs";
-import { HiOutlinePlus } from "react-icons/hi";
-import AddEmployeeModal from "./AddEmployeeModal";
-import { IEmployee } from "@/types/employee";
-import { ConfirmDialog } from "@/components/custom-dialog";
-import { deleteEmployee } from "@/api/employee";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/slices";
-import EmptyContent from "@/components/empty-content/empty-content";
 import { useSnackbar } from "notistack";
-import Iconify from "@/components/iconify";
+import CustomBreadcrumbs from "src/components/custom-breadcrumbs/custom-breadcrumbs";
+
+import { IEmployee } from "src/types/employee";
+import { ConfirmDialog } from "src/components/custom-dialog";
+import { deleteEmployee } from "src/api/employee";
+
+import { RootState } from "src/store/slices";
+import EmptyContent from "src/components/empty-content/empty-content";
+import Iconify from "src/components/iconify";
+import AddEmployeeModal from "./AddEmployeeModal";
 
 //----------------------------------
 
@@ -94,7 +95,7 @@ const EmployeeList = ({
         action={
           <Button
             variant="contained"
-            startIcon={<HiOutlinePlus />}
+            startIcon={<Iconify icon="ic:baseline-plus" />}
             onClick={() => setShowAddEditModal(true)}
           >
             New User

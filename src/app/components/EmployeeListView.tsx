@@ -1,14 +1,13 @@
 "use client";
 
 import react, { useEffect } from "react";
-import { fetchEmployees } from "@/api/employee";
-import EmployeeList from "./EmployeeList";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/slices";
+import { useDispatch , useSelector } from "react-redux";
+
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { Container, Skeleton, Stack } from "@mui/material";
-import EmptyContent from "@/components/empty-content/empty-content";
+import { RootState } from "src/store/slices";
+import { fetchEmployees } from "src/api/employee";
+import EmployeeList from "./EmployeeList";
 
 export default function EmployeeListView() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
