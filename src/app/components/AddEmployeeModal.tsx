@@ -7,13 +7,11 @@ import {
   DialogContent,
   DialogTitle,
   FormControl,
-  FormControlLabel,
   FormHelperText,
   InputLabel,
   MenuItem,
   Select,
   Stack,
-  Switch,
   TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
@@ -21,6 +19,12 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { addEmployee, editEmployee } from "@/api/employee";
 import { v4 as uuidv4 } from "uuid";
 import { IEmployee } from "@/types/employee";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/slices";
+import { useSnackbar } from "notistack";
+
 //----------------------------------
 
 interface AddEmployeeModalProps {
@@ -41,6 +45,10 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
   data,
 }) => {
   const Id = data?.id;
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const employees = useSelector((state: RootState) => state.employee);
+  const { enqueueSnackbar } = useSnackbar();
+
   const formik = useFormik({
     initialValues: {
       firstName: data?.firstName || "",
@@ -49,14 +57,19 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
     },
     enableReinitialize: true,
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit:(values) => {
       if (Id) {
-        await editEmployee({ id: Id, ...values });
+        dispatch(editEmployee({ id: Id, ...values }));
+        enqueueSnackbar("Employee Info Updated Successfully")
+        handleClose();
       } else {
-        await addEmployee({ id: uuidv4(), ...values });
+        dispatch(addEmployee({ id: uuidv4(), ...values }));
+        enqueueSnackbar("New Employee Created Successfully")
+        handleClose();
       }
     },
   });
+
   return (
     <Dialog
       open={open}
@@ -68,7 +81,6 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
         onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
           formik.handleSubmit();
-          handleClose();
         },
       }}
     >
@@ -120,7 +132,7 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
         </form>
       </DialogContent>
       <DialogActions>
-        <LoadingButton variant="contained" loading={false} type="submit">
+        <LoadingButton variant="contained" loading={employees.loading} type="submit">
           {Id ? "Edit" : "Add"}
         </LoadingButton>
         <Button variant="outlined" color="error" onClick={handleClose}>

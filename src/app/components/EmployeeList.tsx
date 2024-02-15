@@ -6,10 +6,18 @@ import CustomBreadcrumbs from "@/components/custom-breadcrumbs/custom-breadcrumb
 import { HiOutlinePlus } from "react-icons/hi";
 import AddEmployeeModal from "./AddEmployeeModal";
 import { IEmployee } from "@/types/employee";
-import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { ConfirmDialog } from "@/components/custom-dialog";
 import { deleteEmployee } from "@/api/employee";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/slices";
+import EmptyContent from "@/components/empty-content/empty-content";
+import { useSnackbar } from "notistack";
+import Iconify from "@/components/iconify";
+
+//----------------------------------
 
 const EmployeeList = ({
   employees,
@@ -19,6 +27,10 @@ const EmployeeList = ({
   const [showAddEditModal, setShowAddEditModal] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<IEmployee>();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const employeesState = useSelector((state: RootState) => state.employee);
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", flex: 1 },
@@ -44,7 +56,7 @@ const EmployeeList = ({
       width: 150,
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<FaEdit size={18} />}
+          icon={<Iconify icon="bx:edit" />}
           color="primary"
           label="Edit"
           key="edit"
@@ -54,7 +66,7 @@ const EmployeeList = ({
           }}
         />,
         <GridActionsCellItem
-          icon={<RiDeleteBin5Line size={18} />}
+          icon={<Iconify icon="solar:trash-bin-trash-bold" />}
           color="error"
           label="Delete"
           key="delete"
@@ -67,8 +79,9 @@ const EmployeeList = ({
     },
   ];
 
-  const handleDelete = async () => {
-    await deleteEmployee(selectedItem?.id || "");
+  const handleDelete = () => {
+    dispatch(deleteEmployee(selectedItem?.id || ""));
+    enqueueSnackbar("Employee Deleted Successfully");
     setShowDeleteModal(false);
     setSelectedItem(undefined);
   };
@@ -77,12 +90,7 @@ const EmployeeList = ({
     <Container maxWidth="lg">
       <CustomBreadcrumbs
         heading="List"
-        links={[
-          { name: "Dashboard", href: "" },
-          { name: "Employee", href: "" },
-
-          { name: "List" },
-        ]}
+        links={[{ name: "Employees", href: "" }, { name: "List" }]}
         action={
           <Button
             variant="contained"
@@ -96,19 +104,29 @@ const EmployeeList = ({
           mb: { xs: 3, md: 5 },
         }}
       />
-      <DataGrid
-        rows={employees || []}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+      {employees?.length ? (
+        <DataGrid
+          rows={employees || []}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[5]}
-        disableRowSelectionOnClick
-      />
+          }}
+          pageSizeOptions={[5]}
+          disableRowSelectionOnClick
+        />
+      ) : (
+        <EmptyContent
+          filled
+          title="No Data"
+          sx={{
+            py: 10,
+          }}
+        />
+      )}
       <AddEmployeeModal
         open={showAddEditModal}
         handleClose={() => {
@@ -126,9 +144,14 @@ const EmployeeList = ({
         title="Delete"
         content="Are you sure want to delete?"
         action={
-          <Button variant="contained" color="error" onClick={handleDelete}>
+          <LoadingButton
+            variant="contained"
+            color="error"
+            loading={employeesState.loading}
+            onClick={handleDelete}
+          >
             Delete
-          </Button>
+          </LoadingButton>
         }
       />
     </Container>

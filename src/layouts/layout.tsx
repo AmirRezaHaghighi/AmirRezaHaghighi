@@ -1,4 +1,5 @@
 "use client";
+import { SnackbarProvider } from "@/components/snackbar";
 import { Box, CssBaseline } from "@mui/material";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -19,7 +20,7 @@ const MainLayout = ({ children }: Props) => {
           pt: { xs: 11, md: 21 },
         }}
       >
-        {children}
+        <SnackbarProvider> {children}</SnackbarProvider>
       </Box>
       <Footer />
     </Box>
