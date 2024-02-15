@@ -12,7 +12,7 @@ import { RootState } from "src/store/slices";
 import { fetchEmployees } from "src/api/employee";
 
 // component
-import EmployeeList from "./EmployeeList";
+import EmployeeList from "./components/EmployeeList";
 
 
 /**

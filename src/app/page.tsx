@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "src/store";
 
 // pages
-import EmployeeListView from "./pages/EmployeeListView";
+import EmployeeListView from "./employee/page";
 //--------------------
 
 

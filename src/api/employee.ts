@@ -12,18 +12,6 @@ export const fetchEmployees = createAsyncThunk(
   }
 );
 
-// export const getEmployee = async (id: string) => {
-//   try {
-//     const res = await fetch(`${baseURL}/employees/${id}`, {
-//       cache: "no-store",
-//     });
-//     const employee = await res.json();
-//     return employee as IEmployee;
-//   } catch {
-//     console.log("f");
-//   }
-// };
-
 export const addEmployee = createAsyncThunk(
   "employee/addEmployee",
   async (employee: IEmployee, { rejectWithValue }) => {
@@ -58,7 +46,6 @@ export const editEmployee = createAsyncThunk(
   }
 );
 
-
 export const deleteEmployee = createAsyncThunk(
   "employee/deleteEmployee",
   async (id: string, { rejectWithValue }) => {
@@ -73,3 +60,29 @@ export const deleteEmployee = createAsyncThunk(
     }
   }
 );
+
+export const getEmployees = async (): Promise<IEmployee[] | null> => {
+  const res = await fetch(`${baseURL}/employees`, {
+    cache: "no-store",
+  });
+  try {
+    const employees = await res.json();
+    return employees as IEmployee[];
+  } catch {
+    console.log("error");
+    return null;
+  }
+};
+
+export const getEmployee = async (id: string): Promise<IEmployee | null> => {
+  const res = await fetch(`${baseURL}/employees/${id}`, {
+    cache: "no-store",
+  });
+  try {
+    const employee = await res.json();
+    return employee as IEmployee;
+  } catch {
+    console.log("error");
+    return null;
+  }
+};

@@ -18,6 +18,10 @@ import { RootState } from "src/store/slices";
 // api
 import { deleteEmployee } from "src/api/employee";
 
+// routes
+import { useRouter } from "next/navigation";
+import { paths } from "src/routes/path";
+
 // components
 import { useSnackbar } from "notistack";
 import { ConfirmDialog } from "src/components/custom-dialog";
@@ -42,6 +46,7 @@ const EmployeeList = ({
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<IEmployee>();
   const { enqueueSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const employeesState = useSelector((state: RootState) => state.employee);
@@ -131,6 +136,7 @@ const EmployeeList = ({
           }}
           pageSizeOptions={[5]}
           disableRowSelectionOnClick
+          onRowClick={(row) => router.push(paths.employee.details(row.id))}
         />
       ) : (
         <EmptyContent

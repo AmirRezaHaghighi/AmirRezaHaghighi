@@ -1,3 +1,16 @@
 {
-  "employees": []
+  "employees": [
+    {
+      "id": "14c546ce-a2b0-4e38-b06a-ce8e31793fbc",
+      "firstName": "Amir Reza",
+      "lastName": "Haghighi",
+      "role": "manager"
+    },
+    {
+      "id": "184d8ba0-d016-4a26-987b-8c3026859597",
+      "firstName": "Ahmad",
+      "lastName": "Ahmady",
+      "role": "employee"
+    }
+  ]
 }
