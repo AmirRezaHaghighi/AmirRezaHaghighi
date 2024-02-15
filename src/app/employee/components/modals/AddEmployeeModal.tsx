@@ -24,7 +24,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useSnackbar } from "notistack";
 
 // store
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { RootState } from "src/store/slices";
 
@@ -60,7 +60,6 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
   handleClose,
   data,
 }) => {
-
   // Extract data from props
   const Id = data?.id;
 
@@ -79,14 +78,14 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
     },
     enableReinitialize: true,
     validationSchema,
-    onSubmit:(values) => {
+    onSubmit: (values) => {
       if (Id) {
         dispatch(editEmployee({ id: Id, ...values }));
-        enqueueSnackbar("Employee Info Updated Successfully")
+        enqueueSnackbar("Employee Info Updated Successfully");
         handleClose();
       } else {
         dispatch(addEmployee({ id: uuidv4(), ...values }));
-        enqueueSnackbar("New Employee Created Successfully")
+        enqueueSnackbar("New Employee Created Successfully");
         handleClose();
       }
     },
@@ -109,7 +108,7 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
       <DialogTitle>{Id ? "Edit" : "Add"} Employee</DialogTitle>
       <DialogContent>
         <form>
-          <Stack spacing={2}>
+          <Stack spacing={2} sx={{ py: 1 }}>
             <TextField
               id="firstName"
               name="firstName"
@@ -153,8 +152,12 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
           </Stack>
         </form>
       </DialogContent>
-      <DialogActions>
-        <LoadingButton variant="contained" loading={employees.loading} type="submit">
+      <DialogActions sx={{ px: 3, pb: 2}}>
+        <LoadingButton
+          variant="contained"
+          loading={employees.loading}
+          type="submit"
+        >
           {Id ? "Edit" : "Add"}
         </LoadingButton>
         <Button variant="outlined" color="error" onClick={handleClose}>

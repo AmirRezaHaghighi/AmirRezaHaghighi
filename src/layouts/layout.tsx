@@ -18,7 +18,7 @@ export default function MainLayout({ children }: Props) {
         component="main"
         sx={{
           flexGrow: 1,
-          pt: { xs: 11, md: 21 },
+          py: { xs: 5, md: 11 },
         }}
       >
         <SnackbarProvider> {children}</SnackbarProvider>

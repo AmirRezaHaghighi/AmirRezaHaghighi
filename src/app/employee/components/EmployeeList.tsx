@@ -136,7 +136,9 @@ const EmployeeList = ({
           }}
           pageSizeOptions={[5]}
           disableRowSelectionOnClick
-          onRowClick={(row) => router.push(paths.employee.details(row.id))}
+          onRowClick={(row) =>
+            router.push(paths.employee.details(row.id as string))
+          }
         />
       ) : (
         <EmptyContent
@@ -162,7 +164,7 @@ const EmployeeList = ({
           setSelectedItem(undefined);
         }}
         title="Delete"
-        content="Are you sure want to delete?"
+        content={`Are you sure want to delete ${selectedItem?.firstName} ${selectedItem?.lastName} ?`}
         action={
           <LoadingButton
             variant="contained"
