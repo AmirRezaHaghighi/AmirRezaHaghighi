@@ -16,7 +16,7 @@ import { deleteEmployee } from "src/api/employee";
 import { RootState } from "src/store/slices";
 import EmptyContent from "src/components/empty-content/empty-content";
 import Iconify from "src/components/iconify";
-import AddEmployeeModal from "./AddEmployeeModal";
+import AddEmployeeModal from "./modals/AddEmployeeModal";
 
 //----------------------------------
 
