@@ -1,13 +1,25 @@
 "use client";
 
 import react, { useEffect } from "react";
+
+// mui
+import { Container, Skeleton, Stack } from "@mui/material";
 import { useDispatch , useSelector } from "react-redux";
 
+// Import types and selectors from the Redux store slices
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { Container, Skeleton, Stack } from "@mui/material";
 import { RootState } from "src/store/slices";
 import { fetchEmployees } from "src/api/employee";
+
+// component
 import EmployeeList from "./EmployeeList";
+
+
+/**
+ * This component represents the view for displaying a list of employees.
+ * It fetches employee data from the Redux store and renders either a loading skeleton
+ * or the list of employees based on the loading state.
+ */
 
 export default function EmployeeListView() {
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();

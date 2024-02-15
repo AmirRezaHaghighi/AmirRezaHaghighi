@@ -1,5 +1,7 @@
 import React, { FC } from "react";
+// YUP
 import * as yup from "yup";
+// mui
 import {
   Button,
   Dialog,
@@ -14,39 +16,59 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { useFormik } from "formik";
 import LoadingButton from "@mui/lab/LoadingButton";
+
+// package
+import { useFormik } from "formik";
 import { v4 as uuidv4 } from "uuid";
+import { useSnackbar } from "notistack";
+
+// store
 import { useDispatch , useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-
-import { useSnackbar } from "notistack";
 import { RootState } from "src/store/slices";
+
+// types
 import { IEmployee } from "src/types/employee";
+
+// api
 import { addEmployee, editEmployee } from "src/api/employee";
 
 //----------------------------------
 
+// Props
 interface AddEmployeeModalProps {
   open: boolean;
   handleClose: () => void;
   data: IEmployee | undefined;
 }
 
+// validation schema
 const validationSchema = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
   lastName: yup.string().required("Last Name is required"),
   role: yup.string().required("Role is required"),
 });
 
+/**
+ * This component represents a modal for adding or editing employee information.
+ * It uses Formik for form management and Yup for form validation.
+ */
+
 const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
   open,
   handleClose,
   data,
 }) => {
+
+  // Extract data from props
   const Id = data?.id;
+
+  // Redux hooks for dispatch and state selection
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const employees = useSelector((state: RootState) => state.employee);
+
+  // snack bar
   const { enqueueSnackbar } = useSnackbar();
 
   const formik = useFormik({

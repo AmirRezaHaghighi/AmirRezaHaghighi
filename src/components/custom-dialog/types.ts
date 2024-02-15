@@ -1,4 +1,4 @@
-// @mui
+// mui
 import { DialogProps } from '@mui/material/Dialog';
 
 // ----------------------------------------------------------------------

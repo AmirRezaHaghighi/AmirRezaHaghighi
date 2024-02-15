@@ -1,24 +1,37 @@
 "use client";
 
 import react, { useState } from "react";
+
+// mui
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { Button, Container } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
+
+// types
+import { IEmployee } from "src/types/employee";
+
+// store
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { useSnackbar } from "notistack";
-import CustomBreadcrumbs from "src/components/custom-breadcrumbs/custom-breadcrumbs";
+import { RootState } from "src/store/slices";
 
-import { IEmployee } from "src/types/employee";
-import { ConfirmDialog } from "src/components/custom-dialog";
+// api
 import { deleteEmployee } from "src/api/employee";
 
-import { RootState } from "src/store/slices";
+// components
+import { useSnackbar } from "notistack";
+import { ConfirmDialog } from "src/components/custom-dialog";
+import CustomBreadcrumbs from "src/components/custom-breadcrumbs/custom-breadcrumbs";
 import EmptyContent from "src/components/empty-content/empty-content";
 import Iconify from "src/components/iconify";
 import AddEmployeeModal from "./modals/AddEmployeeModal";
 
 //----------------------------------
+
+/**
+ * This component represents a list of employees displayed using MUI DataGrid.
+ * It allows users to perform CRUD operations on employee data.
+ */
 
 const EmployeeList = ({
   employees,
