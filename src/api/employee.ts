@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IEmployee } from "src/types/employee";
 
-const baseURL = "http://localhost:3001";
+const baseURL = "https://65d4046a522627d50109c101.mockapi.io/api/";
 
 export const fetchEmployees = createAsyncThunk(
   "employee/fetchEmployees",
   async () => {
-    const res = await fetch(`${baseURL}/employees`, { cache: "no-store" });
+    const res = await fetch(`${baseURL}/employee`, { cache: "no-store" });
     const employees = await res.json();
     return employees as IEmployee[];
   }
@@ -32,7 +32,7 @@ export const addEmployee = createAsyncThunk(
 export const editEmployee = createAsyncThunk(
   "employee/editEmployee",
   async (employee: IEmployee, { rejectWithValue }) => {
-    const response = await fetch(`${baseURL}/employees/${employee.id}`, {
+    const response = await fetch(`${baseURL}/employee/${employee.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(employee),
@@ -49,7 +49,7 @@ export const editEmployee = createAsyncThunk(
 export const deleteEmployee = createAsyncThunk(
   "employee/deleteEmployee",
   async (id: string, { rejectWithValue }) => {
-    const response = await fetch(`${baseURL}/employees/${id}`, {
+    const response = await fetch(`${baseURL}/employee/${id}`, {
       method: "DELETE",
     });
     try {
@@ -62,7 +62,7 @@ export const deleteEmployee = createAsyncThunk(
 );
 
 export const getEmployees = async (): Promise<IEmployee[] | null> => {
-  const res = await fetch(`${baseURL}/employees`, {
+  const res = await fetch(`${baseURL}/employee`, {
     cache: "no-store",
   });
   try {
@@ -75,7 +75,7 @@ export const getEmployees = async (): Promise<IEmployee[] | null> => {
 };
 
 export const getEmployee = async (id: string): Promise<IEmployee | null> => {
-  const res = await fetch(`${baseURL}/employees/${id}`, {
+  const res = await fetch(`${baseURL}/employee/${id}`, {
     cache: "no-store",
   });
   try {

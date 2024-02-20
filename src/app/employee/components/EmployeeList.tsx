@@ -99,10 +99,18 @@ const EmployeeList = ({
   ];
 
   const handleDelete = () => {
-    dispatch(deleteEmployee(selectedItem?.id || ""));
-    enqueueSnackbar("Employee Deleted Successfully");
-    setShowDeleteModal(false);
-    setSelectedItem(undefined);
+    dispatch(deleteEmployee(selectedItem?.id || ""))
+      .unwrap()
+      .then(() => {
+        enqueueSnackbar("Employee Deleted Successfully");
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        enqueueSnackbar(rejectedValueOrSerializedError, { variant: "error" });
+      })
+      .finally(() => {
+        setShowDeleteModal(false);
+        setSelectedItem(undefined);
+      });
   };
 
   return (

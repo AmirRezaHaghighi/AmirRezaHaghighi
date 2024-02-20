@@ -80,13 +80,33 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
     validationSchema,
     onSubmit: (values) => {
       if (Id) {
-        dispatch(editEmployee({ id: Id, ...values }));
-        enqueueSnackbar("Employee Info Updated Successfully");
-        handleClose();
+        dispatch(editEmployee({ id: Id, ...values }))
+          .unwrap()
+          .then(() => {
+            enqueueSnackbar("Employee Info Updated Successfully");
+          })
+          .catch((rejectedValueOrSerializedError) => {
+            enqueueSnackbar(rejectedValueOrSerializedError, {
+              variant: "error",
+            });
+          })
+          .finally(() => {
+            handleClose();
+          });
       } else {
-        dispatch(addEmployee({ id: uuidv4(), ...values }));
-        enqueueSnackbar("New Employee Created Successfully");
-        handleClose();
+        dispatch(addEmployee({ id: uuidv4(), ...values }))
+          .unwrap()
+          .then(() => {
+            enqueueSnackbar("New Employee Created Successfully");
+          })
+          .catch((rejectedValueOrSerializedError) => {
+            enqueueSnackbar(rejectedValueOrSerializedError, {
+              variant: "error",
+            });
+          })
+          .finally(() => {
+            handleClose();
+          });
       }
     },
   });
@@ -152,7 +172,7 @@ const AddEmployeeModal: FC<AddEmployeeModalProps> = ({
           </Stack>
         </form>
       </DialogContent>
-      <DialogActions sx={{ px: 3, pb: 2}}>
+      <DialogActions sx={{ px: 3, pb: 2 }}>
         <LoadingButton
           variant="contained"
           loading={employees.loading}

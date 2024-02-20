@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
-    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "json-server": "json-server --watch src/data/employee.json --port 3001"
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -53,7 +52,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "^0.21.0",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "json-server": "^1.0.0-alpha.23",
     "prettier": "^3.0.0",
     "typescript": "^5"
   }
