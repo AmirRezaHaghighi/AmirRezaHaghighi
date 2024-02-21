@@ -1,7 +1,4 @@
-import { Container } from "@mui/material";
 import { getEmployee, getEmployees } from "src/api/employee";
-import CustomBreadcrumbs from "src/components/custom-breadcrumbs";
-import { paths } from "src/routes/path";
 import { IEmployee } from "src/types/employee";
 import SingleEmployee from "../components/SingleEmployee";
 
