@@ -1,4 +1,3 @@
-"use client";
 
 // pages
 import EmployeeListView from "./employee/page";

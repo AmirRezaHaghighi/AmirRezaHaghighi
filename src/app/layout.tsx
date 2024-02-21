@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import DataContextProvider from "src/components/DataContextProvider ";
 import MainLayout from "src/layouts/layout";
-
-// Import the Redux store
-import { Provider } from "react-redux";
-import store from "src/store";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,9 +31,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider store={store}>
+        <DataContextProvider>
           <MainLayout>{children}</MainLayout>
-        </Provider>
+        </DataContextProvider>
       </body>
     </html>
   );
