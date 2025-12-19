@@ -4,18 +4,16 @@ import React, { useState } from "react";
 import {
   AppBar,
   Box,
-  Button,
   Container,
   IconButton,
   Menu,
   MenuItem,
   Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 
 // components
 import Iconify from "src/components/iconify";
-import { RouterLink } from "src/routes/components";
 
 // layout
 import { HEADER } from "./config-layout";
@@ -68,20 +66,9 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            Realtyna
+            Employee managment
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                component={RouterLink}
-                href="/"
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
+          
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
